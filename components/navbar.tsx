@@ -5,6 +5,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import logoIcon from "@/app/favicon.ico"
+import { Icon } from "@iconify/react"
 
 import {
   NavigationMenu,
@@ -56,7 +57,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function NavBarLeft() {
   return (
-    <NavigationMenu className="relative float-start">
+    <NavigationMenu>
       <NavigationMenuList>
       <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
@@ -128,41 +129,62 @@ ListItem.displayName = "ListItem"
 
 export function NavBarLogo() {
     return (
-        <Link href="/" legacyBehavior passHref>
-            <div className="flex items-center">
-                <Image
-                    src={logoIcon}
-                    alt="Logo"
-                    className="h-8 w-8 mr-2"
-                />
-            </div>
-        </Link>
-    )
-}
-
-export function NavBarRight() {
-    return (
-        <div className="flex flex-row">
-            <Link href="/docs" legacyBehavior passHref>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Sign In
-                </button>
-            </Link>
-            <Link href="/docs" legacyBehavior passHref>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Sign Up
-                </button>
+        <div>
+            <Link href="/" legacyBehavior passHref>
+                <div className="flex items-center">
+                    <Image
+                        src={logoIcon}
+                        alt="Logo"
+                        className="h-8 w-8 mr-2"
+                    />
+                </div>
             </Link>
         </div>
     )
 }
 
+export function NavBarRight() {
+    return (
+        <NavigationMenu>
+            <NavigationMenuList>
+                <NavigationMenuItem>
+                    <Link href="/docs" legacyBehavior passHref>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            <Icon icon="ri:search-line" className="h-6 w-6 size-auto"/>
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="/docs" legacyBehavior passHref>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            <Icon icon="ri:user-line" className="h-6 w-6 size-auto"/>
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="/docs" legacyBehavior passHref>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            <Icon icon="ri:shopping-cart-line" className="h-6 w-6 size-auto"/>
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+            </NavigationMenuList>
+        </NavigationMenu>
+    )
+}
+
 export function NavBar() {
     return (
-        <div className="flex justify-between">
-            {NavBarLeft()}
-            {NavBarLogo()}
-            {NavBarLeft()}
+        <div className="flex items-center justify-between w-full py-2">
+            <div className="flex flex-1 justify-start">
+                {NavBarLeft()}
+            </div>
+            <div className="flex flex-1 justify-center">
+                {NavBarLogo()}
+            </div>
+            <div className="flex flex-1 justify-end">
+                {NavBarRight()}
+            </div>
         </div>
     )
 }
